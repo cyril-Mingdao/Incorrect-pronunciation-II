@@ -324,6 +324,12 @@ body {
   .question-right { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0.5rem; }
 }
 
+/* Portrait layout: keep pronunciation image within viewport (allow stretch-to-fit) */
+@media (orientation: portrait) {
+  .question-left { width: 100%; display: flex; justify-content: center; align-items: center; margin-bottom: 0.75rem; }
+  .question-pronounce-img { width: 100%; max-width: 100%; height: clamp(140px, 28vh, 260px); object-fit: fill; border-radius: 8px; }
+}
+
 .choices {
   display: flex;
   flex-direction: column;
@@ -1404,7 +1410,7 @@ function startQuiz() {
   renderAllQuestions();
   currentCardIndex = 0;
   document.getElementById('floatNav').style.display = 'flex';
-  if (isLandscapeWide()) {
+  if (isLandscapeWide() || isPortrait()) {
     showCardByIndex(0);
   } else {
     autoPlayAudio(0);
@@ -1417,6 +1423,11 @@ function isLandscapeWide() {
   return window.matchMedia('(min-aspect-ratio: 16/10) and (min-width: 768px)').matches;
 }
 
+
+
+function isPortrait() {
+  return window.matchMedia('(orientation: portrait)').matches;
+}
 let currentCardIndex = 0;
 
 function showCardByIndex(idx) {
@@ -1454,7 +1465,7 @@ function autoPlayAudio(idx) {
 
 function navPrev() {
   if (currentCardIndex > 0) {
-    if (isLandscapeWide()) {
+    if (isLandscapeWide() || isPortrait()) {
       showCardByIndex(currentCardIndex - 1);
     } else {
       currentCardIndex--;
@@ -1468,7 +1479,7 @@ function navPrev() {
 
 function navNext() {
   if (currentCardIndex < questions.length - 1) {
-    if (isLandscapeWide()) {
+    if (isLandscapeWide() || isPortrait()) {
       showCardByIndex(currentCardIndex + 1);
     } else {
       currentCardIndex++;
@@ -1660,7 +1671,7 @@ function restartQuiz() {
   qc.classList.add('active');
   renderAllQuestions();
   document.getElementById('floatNav').style.display = 'flex';
-  if (isLandscapeWide()) {
+  if (isLandscapeWide() || isPortrait()) {
     showCardByIndex(0);
   } else {
     autoPlayAudio(0);
@@ -1842,7 +1853,7 @@ function toggleMode() {
     } else {
       document.getElementById('quizContainer').classList.add('active');
       document.getElementById('floatNav').style.display = 'flex';
-      if (isLandscapeWide()) showCardByIndex(currentCardIndex);
+      if (isLandscapeWide() || isPortrait()) showCardByIndex(currentCardIndex);
     }
     document.getElementById('modeToggleBtn').textContent = '🎯 切換 Bingo';
   }
