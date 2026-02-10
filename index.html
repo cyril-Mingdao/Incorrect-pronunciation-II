@@ -1134,6 +1134,70 @@ body {
 }
 
 
+
+
+/* Portrait Bingo — auto-fit 5x5 board within viewport by scaling typography & grid rows */
+@media (orientation: portrait) {
+  .bingo-container {
+    padding: 1rem 0.9rem 1.1rem;
+  }
+
+  .bingo-container.active {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .bingo-header { margin-bottom: 0.75rem; }
+  .bingo-header h2 { font-size: clamp(1.25rem, 5.2vw, 1.7rem); }
+  .bingo-header p { font-size: clamp(0.72rem, 3.2vw, 0.9rem); margin-top: 0.2rem; }
+
+  .bingo-current { padding: 0.9rem 0.8rem; margin-bottom: 0.6rem; }
+  .bingo-current-word { font-size: clamp(1.6rem, 7.2vw, 2.4rem); }
+  .bingo-current-romanization { font-size: clamp(0.85rem, 3.6vw, 1.05rem); }
+
+  .bingo-draw-btn { margin: 0.5rem auto; padding: 0.55rem 1.6rem; font-size: 0.95rem; }
+
+  .bingo-grid {
+    margin-top: 0.5rem;
+    gap: 4px;
+    flex: 1 1 auto;
+    min-height: 0;
+    height: auto;
+    grid-template-rows: repeat(5, 1fr);
+  }
+
+  .bingo-cell { aspect-ratio: auto; min-height: 0; padding: 2px; }
+  .bingo-cell-num { font-size: clamp(0.55rem, 2.1vw, 0.75rem); }
+
+  .bingo-cell-word {
+    font-size: clamp(0.78rem, 2.8vw, 1.05rem);
+    line-height: 1.05;
+    text-align: center;
+    padding: 0 2px;
+    word-break: break-word;
+  }
+
+  .bingo-cell-roman {
+    font-size: clamp(0.42rem, 2.0vw, 0.62rem);
+    line-height: 1.05;
+    text-align: center;
+    padding: 0 2px;
+    word-break: break-word;
+  }
+
+  .bingo-called-list {
+    margin-top: 0.5rem;
+    max-height: 9vh;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  .bingo-called-tag { font-size: 0.68rem; padding: 0.25rem 0.55rem; }
+
+  .bingo-actions { margin-top: 0.5rem; flex-shrink: 0; }
+  .bingo-actions .btn-review { padding: 0.45rem 1rem; font-size: 0.8rem; }
+}
 /* Navigation arrows */
 .nav-arrow {
   position: fixed;
